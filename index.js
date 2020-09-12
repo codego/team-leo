@@ -38,7 +38,7 @@ const payload = {
       },
       "body": "",
       "created_at": "2020-09-12T14:20:04Z",
-      "updated_at": "2020-09-12T15:20:30Z",
+      "updated_at": "2020-09-12T15:46:50Z",
       "closed_at": null,
       "merged_at": null,
       "merge_commit_sha": "fbceeff290fdca7912d9247be967d8b37a90d2e6",
@@ -61,11 +61,11 @@ const payload = {
       "review_comments_url": "https://api.github.com/repos/codego/team-leo/pulls/2/comments",
       "review_comment_url": "https://api.github.com/repos/codego/team-leo/pulls/comments{/number}",
       "comments_url": "https://api.github.com/repos/codego/team-leo/issues/2/comments",
-      "statuses_url": "https://api.github.com/repos/codego/team-leo/statuses/3ac151226fef80e55b6862884bf1cd7b4c581e1a",
+      "statuses_url": "https://api.github.com/repos/codego/team-leo/statuses/a50c1df88358a6fdcbdca1da717a3e0468b4cd24",
       "head": {
         "label": "codego:COR-123/nombre",
         "ref": "COR-123/nombre",
-        "sha": "3ac151226fef80e55b6862884bf1cd7b4c581e1a",
+        "sha": "a50c1df88358a6fdcbdca1da717a3e0468b4cd24",
         "user": {
           "login": "codego",
           "id": 1633163,
@@ -154,7 +154,7 @@ const payload = {
           "deployments_url": "https://api.github.com/repos/codego/team-leo/deployments",
           "created_at": "2020-09-12T13:47:13Z",
           "updated_at": "2020-09-12T13:57:55Z",
-          "pushed_at": "2020-09-12T15:20:30Z",
+          "pushed_at": "2020-09-12T15:46:50Z",
           "git_url": "git://github.com/codego/team-leo.git",
           "ssh_url": "git@github.com:codego/team-leo.git",
           "clone_url": "https://github.com/codego/team-leo.git",
@@ -277,7 +277,7 @@ const payload = {
           "deployments_url": "https://api.github.com/repos/codego/team-leo/deployments",
           "created_at": "2020-09-12T13:47:13Z",
           "updated_at": "2020-09-12T13:57:55Z",
-          "pushed_at": "2020-09-12T15:20:30Z",
+          "pushed_at": "2020-09-12T15:46:50Z",
           "git_url": "git://github.com/codego/team-leo.git",
           "ssh_url": "git@github.com:codego/team-leo.git",
           "clone_url": "https://github.com/codego/team-leo.git",
@@ -331,7 +331,7 @@ const payload = {
           "href": "https://api.github.com/repos/codego/team-leo/pulls/2/commits"
         },
         "statuses": {
-          "href": "https://api.github.com/repos/codego/team-leo/statuses/3ac151226fef80e55b6862884bf1cd7b4c581e1a"
+          "href": "https://api.github.com/repos/codego/team-leo/statuses/a50c1df88358a6fdcbdca1da717a3e0468b4cd24"
         }
       },
       "author_association": "OWNER",
@@ -344,13 +344,13 @@ const payload = {
       "comments": 0,
       "review_comments": 0,
       "maintainer_can_modify": false,
-      "commits": 6,
-      "additions": 443,
+      "commits": 10,
+      "additions": 731,
       "deletions": 1,
       "changed_files": 3
     },
-    "before": "c4d5f3290e946e872c9f07d617bcd5996350aab5",
-    "after": "3ac151226fef80e55b6862884bf1cd7b4c581e1a",
+    "before": "90b9e2b21f8a21e67dc61188c33ebb4528ab91de",
+    "after": "a50c1df88358a6fdcbdca1da717a3e0468b4cd24",
     "repository": {
       "id": 294952519,
       "node_id": "MDEwOlJlcG9zaXRvcnkyOTQ5NTI1MTk=",
@@ -419,7 +419,7 @@ const payload = {
       "deployments_url": "https://api.github.com/repos/codego/team-leo/deployments",
       "created_at": "2020-09-12T13:47:13Z",
       "updated_at": "2020-09-12T13:57:55Z",
-      "pushed_at": "2020-09-12T15:20:30Z",
+      "pushed_at": "2020-09-12T15:46:50Z",
       "git_url": "git://github.com/codego/team-leo.git",
       "ssh_url": "git@github.com:codego/team-leo.git",
       "clone_url": "https://github.com/codego/team-leo.git",
@@ -465,17 +465,18 @@ const payload = {
       "type": "User",
       "site_admin": false
     }
-  };
-
-// console.log(JSON.stringify(payload))
-
+  }
+// console.log(payload)
 
 const signature = sign(Buffer.from(JSON.stringify(payload)));
 // sha1=8dd6e74261e58a686b18285faa28f861e3e2ea16
-// console.log(signature);
+console.log(signature);
 
 
 const crypto = require('crypto')
+hmac = crypto.createHmac('sha1', 'GERALDINE').update(JSON.stringify(payload), 'utf8').digest('hex');
+
+console.log(hmac);
 var hmac = crypto.createHmac("sha1", 'GERALDINE');
 var calculatedSignature = "sha1=" + hmac.update(JSON.stringify(payload)).digest("hex");
 
@@ -487,3 +488,7 @@ const corStr = branch.split('COR-');
 const separado = corStr[1].split('/');
 
 console.log(separado[0]);
+
+const CryptoJS = require('crypto-js');
+var hash = CryptoJS.HmacSHA1(payload, 'GERALDINE').toString(CryptoJS.enc.Hex)
+console.log("signature", "sha1=" + hash);
