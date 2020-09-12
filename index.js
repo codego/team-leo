@@ -4,7 +4,6 @@ const sign = signer({ algorithm: 'sha1', secret: 'GERALDINE' });
 const signature = sign(Buffer.from(JSON.stringify(payload)));
 console.log(signature);
 
-
 const crypto = require('crypto')
 hmac = crypto.createHmac('sha1', 'GERALDINE').update(JSON.stringify(payload), 'utf8').digest('hex');
 
