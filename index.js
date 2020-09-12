@@ -467,6 +467,7 @@ const payload = {
     }
   };
 console.log(JSON.stringify(payload))
+
 const signature = sign(Buffer.from(JSON.stringify(payload)));
 // sha1=8dd6e74261e58a686b18285faa28f861e3e2ea16
 // console.log(signature);
