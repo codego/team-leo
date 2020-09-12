@@ -8,6 +8,7 @@ const crypto = require('crypto')
 hmac = crypto.createHmac('sha1', 'GERALDINE').update(JSON.stringify(payload), 'utf8').digest('hex');
 
 console.log(hmac);
+
 var hmac = crypto.createHmac("sha1", 'GERALDINE');
 var calculatedSignature = "sha1=" + hmac.update(JSON.stringify(payload)).digest("hex");
 
